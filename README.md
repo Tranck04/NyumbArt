@@ -1,2 +1,2 @@
 # NyumbArt
-Projet du solution challenge 2023
+Le projet du Google Solution Challenge
