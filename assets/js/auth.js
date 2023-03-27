@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase.app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, connectAuthEmulator, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIokShQHeY-GkcFLSdhikHGNQGZddUbJQ",
@@ -15,7 +15,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
 const auth = getAuth(firebaseConfig);
+connectAuthEmulator(auth, "http://localhost:5500");
+
+//const loginEmailPassword = async () => {}
 
 onAuthStateChanged(auth, (user) => {
     if(user !== null){
