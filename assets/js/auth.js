@@ -1,6 +1,27 @@
+import './style.css'
 import { initializeApp } from "firebase.app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, connectAuthEmulator, onAuthStateChanged } from "firebase/auth";
+import { 
+    getAuth, 
+    connectAuthEmulator, 
+    onAuthStateChanged, 
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword } from "firebase/auth";
+import { 
+    txtEmail, 
+    txtPassword, 
+    btnLogin, 
+    btnSignUp, 
+    btnLogout, 
+    divAuthState, 
+    lblAuthState, 
+    divLoginError, 
+    lblLoginErrorMessage, 
+    showLoginForm, 
+    showApp, 
+    hideLoginError, 
+    showLoginState } from './ui.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIokShQHeY-GkcFLSdhikHGNQGZddUbJQ",
@@ -12,19 +33,52 @@ const firebaseConfig = {
   measurementId: "G-3TE4VE0KB3"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const lodginEmailPassword = async() => {
+    const loginEmail = txtEmail.value;
+    const loginPassword = txtPassword.value;
+
+    await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+}
+
+const createAccount = async() => {
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, password)
+    }
+    catch (error) {
+        console.log("error creating account: ${error.message}")
+        showLoginError(error);
+    }
+}
+
+const monitorAuthState = async() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log(user)
+            showApp();
+            showLoginState(user);
+
+            hideLoginError();
+            hideLinkError();
+        }
+        else {
+            showLoginForm();
+            lblAuthState.innerHTML = "User is signed out";
+        }
+    });
+}
+
+const logout = async() => {
+    await signOut(auth);
+}
+
+btnLogin.addEventListener('click', lodginEmailPassword);
+btnSignUp.addEventListener('click', createAccount);
+btnLogout.addEventListener('click', logout);
 
 const auth = getAuth(firebaseConfig);
 connectAuthEmulator(auth, "http://localhost:5500");
 
-//const loginEmailPassword = async () => {}
-
-onAuthStateChanged(auth, (user) => {
-    if(user !== null){
-        console.log("User is signed in");
-    } else {
-        console.log("User is signed out");
-    }
-});
+monitorAuthState();
