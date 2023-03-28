@@ -1,7 +1,7 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
-  import { getDatabase } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+  import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -34,7 +34,11 @@
     // Signed in 
     const user = userCredential.user;
     
-    alert('User created successfully')
+    set(ref(database, 'users/' + user.uid), {
+        pseudo: pseudo,
+        email: email,
+    });
+    alert('Compte créé avec succès')
     window.location.replace("login.html");
     
     // ...

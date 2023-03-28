@@ -43,7 +43,7 @@
                     <div class="card-body p-md-5 mx-md-4">
       
                       <div class="text-center">
-                        <h4 class="mt-1 mb-5 pb-1">Bienveue dans NyumbArt</h4>
+                        <h4 class="mt-1 mb-5 pb-1">Bienvenue dans NyumbArt</h4>
                       </div>
       
                       <form>
@@ -51,7 +51,7 @@
       
                         <div class="form-outline mb-4">
                           <input type="email" id="txtEmail" class="form-control"
-                            placeholder="Numéro de téléphone ou adresse mail" />
+                            placeholder="Pseudo ou adresse mail" />
                           <label class="form-label" for="txtEmail">Nom d'ulisisateur</label>
                         </div>
       
@@ -63,10 +63,6 @@
                         <div class="text-center pt-1 mb-5 pb-1">
                           <button id="btnLogin" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Connexion</button>
                           <a class="text-muted" href="#!">Mot de passe oublié?</a>
-                        </div>
-
-                        <div id="divLoginError" class="group">
-                          <div id="lblLoginErrorMessage" class="errorlabel">Error message</div>
                         </div>
       
                         <div class="d-flex align-items-center justify-content-center pb-4">
@@ -88,32 +84,5 @@
                   </div>
 </body>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
-  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDIokShQHeY-GkcFLSdhikHGNQGZddUbJQ",
-    authDomain: "sincere-sun-365819.firebaseapp.com",
-    databaseURL: "https://sincere-sun-365819-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "sincere-sun-365819",
-    storageBucket: "sincere-sun-365819.appspot.com",
-    messagingSenderId: "106854662718",
-    appId: "1:106854662718:web:8551e81f7011c4e48e476f",
-    measurementId: "G-3TE4VE0KB3"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth();
-  const database = getDatabase(app);
-</script>
+<script type="module" src="assets/js/login.js"></script>
 </html>
