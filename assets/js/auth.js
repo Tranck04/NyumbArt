@@ -1,5 +1,5 @@
-import './style.css'
-import { initializeApp } from "firebase.app";
+import 'C:/NyumbArt/assets/css/style.css'
+import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { 
     getAuth, 
@@ -79,6 +79,6 @@ btnSignUp.addEventListener('click', createAccount);
 btnLogout.addEventListener('click', logout);
 
 const auth = getAuth(firebaseConfig);
-connectAuthEmulator(auth, "http://localhost:5500");
+connectAuthEmulator(auth, "http://localhost:9099");
 
 monitorAuthState();
