@@ -1,84 +1,49 @@
-import 'C:/NyumbArt/assets/css/style.css'
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { 
-    getAuth, 
-    connectAuthEmulator, 
-    onAuthStateChanged, 
-    signOut,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword } from "firebase/auth";
-import { 
-    txtEmail, 
-    txtPassword, 
-    btnLogin, 
-    btnSignUp, 
-    btnLogout, 
-    divAuthState, 
-    lblAuthState, 
-    divLoginError, 
-    lblLoginErrorMessage, 
-    showLoginForm, 
-    showApp, 
-    hideLoginError, 
-    showLoginState } from './ui.js'
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDIokShQHeY-GkcFLSdhikHGNQGZddUbJQ",
-  authDomain: "sincere-sun-365819.firebaseapp.com",
-  projectId: "sincere-sun-365819",
-  storageBucket: "sincere-sun-365819.appspot.com",
-  messagingSenderId: "106854662718",
-  appId: "1:106854662718:web:8551e81f7011c4e48e476f",
-  measurementId: "G-3TE4VE0KB3"
-};
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDIokShQHeY-GkcFLSdhikHGNQGZddUbJQ",
+    authDomain: "sincere-sun-365819.firebaseapp.com",
+    databaseURL: "https://sincere-sun-365819-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "sincere-sun-365819",
+    storageBucket: "sincere-sun-365819.appspot.com",
+    messagingSenderId: "106854662718",
+    appId: "1:106854662718:web:8551e81f7011c4e48e476f",
+    measurementId: "G-3TE4VE0KB3"
+  };
 
-const lodginEmailPassword = async() => {
-    const loginEmail = txtEmail.value;
-    const loginPassword = txtPassword.value;
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const database = getDatabase(app);
 
-    await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-}
+  btnSignup.addEventListener('click', (e) => {
 
-const createAccount = async() => {
-    const email = txtEmail.value;
-    const password = txtPassword.value;
+    var pseudo = document.getElementById("pseudo").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("txtPassword").value;
 
-    try {
-        await createUserWithEmailAndPassword(auth, email, password)
-    }
-    catch (error) {
-        console.log("error creating account: ${error.message}")
-        showLoginError(error);
-    }
-}
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    
+    alert('User created successfully')
+    window.location.replace("login.html");
+    
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
 
-const monitorAuthState = async() => {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log(user)
-            showApp();
-            showLoginState(user);
-
-            hideLoginError();
-            hideLinkError();
-        }
-        else {
-            showLoginForm();
-            lblAuthState.innerHTML = "User is signed out";
-        }
-    });
-}
-
-const logout = async() => {
-    await signOut(auth);
-}
-
-btnLogin.addEventListener('click', lodginEmailPassword);
-btnSignUp.addEventListener('click', createAccount);
-btnLogout.addEventListener('click', logout);
-
-const auth = getAuth(firebaseConfig);
-connectAuthEmulator(auth, "http://localhost:9099");
-
-monitorAuthState();
+    alert('errorMessage')
+    // ..
+  });
+  });
