@@ -1,5 +1,5 @@
 # NyumbArt
-Le projet du Google Solution Challenge
+Google Solution Challenge project
 
 # Description
-Ce site est une galerie d'art qui met en avant les artistes est un espace en ligne où les artistes peuvent présenter leurs œuvres et les vendre directement aux collectionneurs d'art et aux amateurs d'art du monde entier. Ce type de site permet aux artistes de promouvoir leur travail, d'atteindre un public plus large et de gérer leur propre entreprise d'art en ligne
+This website is an art gallery that showcases artists and is an online space where artists can showcase their works and sell them directly to art collectors and enthusiasts worldwide. This type of site allows artists to promote their work, reach a wider audience, and manage their own online art business.
